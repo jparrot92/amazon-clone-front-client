@@ -12,8 +12,15 @@ import Footer from '~/components/Footer';
 export default {
   components: {
     Navbar,
-    Footer
-  }
-}
+    Footer,
+  },
+};
 </script>
 
+<style>
+body {
+  font-size: 13px;
+  line-height: 19px;
+  color: #111;
+}
+</style>
