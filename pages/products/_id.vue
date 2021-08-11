@@ -391,7 +391,7 @@ export default {
       const response = await $axios.$get(`/api/products/${params.id}`);
 
       return {
-        product: response.product,
+        product: response.data,
       };
     } catch (err) {
       // eslint-disable-next-line no-console

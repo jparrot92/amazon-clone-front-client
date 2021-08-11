@@ -150,7 +150,7 @@ export default {
       const response = await $axios.$get('/api/products');
 
       return {
-        products: response.products,
+        products: response.data,
       };
     } catch (err) {
       // eslint-disable-next-line no-console

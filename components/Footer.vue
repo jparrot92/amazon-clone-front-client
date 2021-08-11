@@ -126,7 +126,13 @@
               <span class="icp-container-desktop">
                 <div class="navFooterLine">
                   <a href="#" class="icp-button">
-                    <div class="icp-nav-globe-img-2 icp-button-globe-2 icp-nav-globe-curr-fix"></div>
+                    <div
+                      class="
+                        icp-nav-globe-img-2
+                        icp-button-globe-2
+                        icp-nav-globe-curr-fix
+                      "
+                    ></div>
                     <span class="icp-color-base">English</span>
                     <span class="nav-arrow icp-up-down-arrow"></span>
                   </a>
@@ -567,7 +573,9 @@
           <li>
             <a href class="nav_a">Internet-Based Ads</a>
           </li>
-          <li class="nav_last">© 1996-2019, Amazon.com, Inc. or its affiliates</li>
+          <li class="nav_last">
+            © 1996-2019, Amazon.com, Inc. or its affiliates
+          </li>
         </ul>
       </div>
     </div>
