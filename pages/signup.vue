@@ -19,6 +19,7 @@
                   </label>
                   <input
                     id="ap_customer_name"
+                    v-model="name"
                     type="text"
                     class="
                       a-input-text
@@ -36,6 +37,7 @@
                   </label>
                   <input
                     id="ap_customer_name"
+                    v-model="email"
                     type="email"
                     class="
                       a-input-text
@@ -53,6 +55,7 @@
                   </label>
                   <input
                     id="ap_customer_name"
+                    v-model="password"
                     type="password"
                     class="
                       a-input-text
@@ -72,7 +75,7 @@
                 <div class="a-row a-spacing-extra-large mb-4">
                   <span class="a-button-primary">
                     <span class="a-button-inner">
-                      <span class="a-button-text">
+                      <span class="a-button-text" @click="onSignup">
                         Create your Amazon account
                       </span>
                     </span>
@@ -106,5 +109,37 @@
 <script>
 export default {
   layout: 'none',
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async onSignup() {
+      try {
+        const data = {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        };
+        const response = await this.$axios.$post('/api/auth/signup', data);
+
+        if (response.success) {
+          this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          });
+          this.$router.push('/');
+        }
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+    },
+  },
 };
 </script>
