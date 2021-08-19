@@ -28,7 +28,7 @@
                     Deliver to
                   </span>
                   <span id="glow-ingress-line2" class="nav-line-2">
-                    California
+                    {{ $auth.$state.user.address.city }}
                   </span>
                 </div>
               </nuxt-link>
