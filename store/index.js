@@ -1,7 +1,9 @@
 export const state = () => ({
-  // State
+  // Cart
   cart: [],
   cartLength: 0,
+
+  // Shipping
   shippingPrice: 0,
   shippingEstimatedDelivery: '',
 });
@@ -75,6 +77,13 @@ export const mutations = {
     state.shippingPrice = price;
     state.shippingEstimatedDelivery = estimatedDelivery;
   },
+
+  clearCart(state) {
+    state.cart = [];
+    state.cartLength = 0;
+    state.shippingPrice = 0;
+    state.shippingEstimatedDelivery = '';
+  },
 };
 
 export const getters = {
@@ -103,5 +112,9 @@ export const getters = {
     });
 
     return total + state.shippingPrice;
+  },
+
+  getEstimatedDelivery(state) {
+    return state.shippingEstimatedDelivery;
   },
 };

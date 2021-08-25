@@ -34,7 +34,7 @@
             <div class="a-section">
               <h2>Make a payment</h2>
               <div class="a-section a-spacing-none a-spacing-top-small">
-                <b>The total price is $999999</b>
+                <b>The total price is ${{ getCartTotalPriceWithShipping }}</b>
               </div>
 
               <!-- Error message  -->
@@ -67,7 +67,9 @@
                   <div class="a-spacing-top-large">
                     <span class="a-button-register">
                       <span class="a-button-inner">
-                        <span class="a-button-text">Purchase</span>
+                        <span class="a-button-text" @click="onPurchase">
+                          Purchase
+                        </span>
                       </span>
                     </span>
                   </div>
@@ -85,6 +87,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
@@ -92,6 +96,13 @@ export default {
       stripe: null,
       card: null,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'getCart',
+      'getCartTotalPriceWithShipping',
+      'getEstimatedDelivery',
+    ]),
   },
   mounted() {
     // eslint-disable-next-line no-undef
@@ -101,6 +112,23 @@ export default {
     const elements = this.stripe.elements();
     this.card = elements.create('card');
     this.card.mount(this.$refs.card);
+  },
+  methods: {
+    async onPurchase() {
+      try {
+        const response = await this.$axios.$post('/api/payment', {
+          totalPrice: this.getCartTotalPriceWithShipping,
+          cart: this.getCart,
+          estimatedDelivery: this.getEstimatedDelivery,
+        });
+        if (response.success) {
+          this.$store.commit('clearCart');
+          this.$router.push('/');
+        }
+      } catch (err) {
+        this.error = err.message;
+      }
+    },
   },
 };
 </script>
