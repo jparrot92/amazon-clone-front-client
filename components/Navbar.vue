@@ -27,7 +27,11 @@
                   <span id="glow-ingress-line1" class="nav-line-1">
                     Deliver to
                   </span>
-                  <span id="glow-ingress-line2" class="nav-line-2">
+                  <span
+                    v-if="$auth.loggedIn"
+                    id="glow-ingress-line2"
+                    class="nav-line-2"
+                  >
                     {{ $auth.$state.user.address.city }}
                   </span>
                 </div>
